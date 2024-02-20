@@ -57,6 +57,15 @@ func (c *CelestiaDA) Get(ctx context.Context, ids []da.ID) ([]da.Blob, error) {
 	return blobs, nil
 }
 
+// getPeerInfo return the peer info, i.e : node id
+func (c *CelestiaDA) GetPeerInfo(ctx context.Context) (string, error) {
+	peerInfo, err := c.client.P2P.Info(ctx)
+	if err != nil {
+		return "", err
+	}
+	return peerInfo.ID.String(), nil
+}
+
 // GetIDs returns IDs of all Blobs located in DA at given height.
 func (c *CelestiaDA) GetIDs(ctx context.Context, height uint64) ([]da.ID, error) {
 	var ids []da.ID
