@@ -31,6 +31,13 @@ func startRPCInfoServer(authToken, rpcAddress, nsString string, gasPrice float64
 		})
 	})
 
+	//todo: protect the auth-token
+	r.GET("/authToken", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"authToken": authToken,
+		})
+	})
+
 	r.Run(rpcAddr)
 }
 
