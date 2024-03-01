@@ -14,7 +14,7 @@ var (
 	rpcAddr = ":8080"
 )
 
-func startRPCInfoServer(authToken, rpcAddress, nsString string, gasPrice float64) {
+func startRPCInfoServer(authToken, rpcToken, rpcAddress, nsString string, gasPrice float64) {
 	r := gin.Default()
 	r.Use(Cors())
 	da := NewRPCCelestiaDa(authToken, rpcAddress, nsString, gasPrice)
@@ -32,9 +32,9 @@ func startRPCInfoServer(authToken, rpcAddress, nsString string, gasPrice float64
 	})
 
 	//todo: protect the auth-token
-	r.GET("/authToken", func(c *gin.Context) {
+	r.GET("/rpcToken", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"authToken": authToken,
+			"rpcToken": rpcToken,
 		})
 	})
 
