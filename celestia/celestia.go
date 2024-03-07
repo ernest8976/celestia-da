@@ -171,10 +171,7 @@ func (c *CelestiaDA) Validate(ctx context.Context, ids []da.ID, daProofs []da.Pr
 		err := blobProof.UnmarshalJSON(proof)
 
 		if err != nil {
-			fmt.Println(string(proof))
-			fmt.Println(err.Error())
-		} else {
-			fmt.Println((*blobProof)[0].Start())
+			return nil, err
 		}
 		proofs = append(proofs, blobProof)
 	}
