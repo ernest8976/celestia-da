@@ -170,6 +170,10 @@ func (c *CelestiaDA) Validate(ctx context.Context, ids []da.ID, daProofs []da.Pr
 	for _, daProof := range daProofs {
 		var blobProof *blob.Proof
 		err := blobProof.UnmarshalJSON(daProof)
+		if err != nil {
+			fmt.Println(string(daProof))
+			return nil, err
+		}
 		for _, v := range *blobProof {
 			bz, _ := v.MarshalJSON()
 			fmt.Println(string(bz))
