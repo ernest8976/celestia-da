@@ -3,7 +3,6 @@ package celestia
 import (
 	"context"
 	"encoding/binary"
-	"fmt"
 	"log"
 	"strings"
 
