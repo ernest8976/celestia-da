@@ -122,7 +122,7 @@ func (c *CelestiaDA) Submit(ctx context.Context, daBlobs []da.Blob, gasPrice flo
 			return nil, nil, err
 		}
 		// TODO(tzdybal): does always len(*proof) == 1?
-		fmt.Println("proof length-------------------")
+		fmt.Println("proof length-------------------,", len((*proof)))
 		proofs[i], err = (*proof)[0].MarshalJSON()
 		if err != nil {
 			return nil, nil, err
