@@ -165,24 +165,20 @@ func (c *CelestiaDA) blobsAndCommitments(daBlobs []da.Blob, ns da.Namespace) ([]
 func (c *CelestiaDA) Validate(ctx context.Context, ids []da.ID, daProofs []da.Proof, ns da.Namespace) ([]bool, error) {
 	c.namespace = c.defaultNamespace(ns)
 	var included []bool
-	var proofs []*blob.Proof
+	var proofs [](*blob.Proof)
+	for _, proof := range daProofs {
+		blobProof := &blob.Proof{}
+		err := blobProof.UnmarshalJSON(proof)
 
-	for _, daProof := range daProofs {
-		var blobProof *blob.Proof
-		err := blobProof.UnmarshalJSON(daProof)
 		if err != nil {
-			fmt.Println(string(daProof))
-			return nil, err
-		}
-		for _, v := range *blobProof {
-			bz, _ := v.MarshalJSON()
-			fmt.Println(string(bz))
-		}
-		if err != nil {
-			return nil, err
+			fmt.Println(string(proof))
+			fmt.Println(err.Error())
+		} else {
+			fmt.Println((*blobProof)[0].Start())
 		}
 		proofs = append(proofs, blobProof)
 	}
+
 	for i, id := range ids {
 		height, commitment := splitID(id)
 		fmt.Println("height", height, "commit", hexutil.Encode(commitment))
