@@ -3,6 +3,8 @@ package celestia
 import (
 	"context"
 	"encoding/binary"
+	"fmt"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"log"
 	"strings"
 
@@ -10,8 +12,6 @@ import (
 	rpc "github.com/celestiaorg/celestia-node/api/rpc/client"
 	"github.com/celestiaorg/celestia-node/blob"
 	"github.com/celestiaorg/celestia-node/share"
-	"github.com/celestiaorg/nmt"
-
 	"github.com/rollkit/go-da"
 )
 
@@ -166,16 +166,22 @@ func (c *CelestiaDA) Validate(ctx context.Context, ids []da.ID, daProofs []da.Pr
 	c.namespace = c.defaultNamespace(ns)
 	var included []bool
 	var proofs []*blob.Proof
+
 	for _, daProof := range daProofs {
-		nmtProof := &nmt.Proof{}
-		if err := nmtProof.UnmarshalJSON(daProof); err != nil {
+		var blobProof *blob.Proof
+		err := blobProof.UnmarshalJSON(daProof)
+		for _, v := range *blobProof {
+			bz, _ := v.MarshalJSON()
+			fmt.Println(string(bz))
+		}
+		if err != nil {
 			return nil, err
 		}
-		proof := &blob.Proof{nmtProof}
-		proofs = append(proofs, proof)
+		proofs = append(proofs, blobProof)
 	}
 	for i, id := range ids {
 		height, commitment := splitID(id)
+		fmt.Println("height", height, "commit", hexutil.Encode(commitment))
 		// TODO(tzdybal): for some reason, if proof doesn't match commitment, API returns (false, "blob: invalid proof")
 		//    but analysis of the code in celestia-node implies this should never happen - maybe it's caused by openrpc?
 		//    there is no way of gently handling errors here, but returned value is fine for us

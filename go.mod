@@ -1,4 +1,4 @@
-module github.com/rollkit/celestia-da
+module github.com/hunter/celestia-da
 
 go 1.21.1
 
