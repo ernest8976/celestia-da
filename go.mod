@@ -1,4 +1,4 @@
-module github.com/hunter/celestia-da
+module github.com/ernest8976/celestia-da
 
 go 1.21.1
 
