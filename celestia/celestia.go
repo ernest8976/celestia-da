@@ -3,6 +3,7 @@ package celestia
 import (
 	"context"
 	"encoding/binary"
+	"fmt"
 	"log"
 	"strings"
 
@@ -69,6 +70,15 @@ func (c *CelestiaDA) Get(ctx context.Context, ids []da.ID, ns da.Namespace) ([]d
 		blobs = append(blobs, blob.Data)
 	}
 	return blobs, nil
+}
+
+// getPeerInfo return the peer info, i.e : node id
+func (c *CelestiaDA) GetPeerInfo(ctx context.Context) (string, error) {
+	peerInfo, err := c.client.P2P.Info(ctx)
+	if err != nil {
+		return "", err
+	}
+	return peerInfo.ID.String(), nil
 }
 
 // GetIDs returns IDs of all Blobs located in DA at given height.

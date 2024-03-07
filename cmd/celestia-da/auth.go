@@ -69,3 +69,27 @@ func authToken(path string) (string, error) {
 	}
 	return token, nil
 }
+
+func authAdminToken(path string) (string, error) {
+	ks, err := newKeystore(path)
+	if err != nil {
+		return "", err
+	}
+
+	key, err := ks.Get(nodemod.SecretName)
+	if err != nil {
+		if !errors.Is(err, keystore.ErrNotFound) {
+			return "", err
+		}
+		key, err = generateNewKey(ks)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	token, err := buildJWTToken(key.Body, perms.AllPerms)
+	if err != nil {
+		return "", err
+	}
+	return token, nil
+}

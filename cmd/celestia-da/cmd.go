@@ -51,8 +51,15 @@ func WithDataAvailabilityService(flags []*pflag.FlagSet) func(*cobra.Command) {
 					log.Fatal(err)
 				}
 				rpcToken = token
+				log.Info("rpctoken: ", rpcToken)
 			}
 
+			authToken, err := authAdminToken(cmdnode.StorePath(c.Context()))
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			go startRPCInfoServer(authToken, rpcToken, rpcAddress, nsString, gasPrice)
 			// serve the gRPC service in a goroutine
 			go serve(cmd.Context(), rpcAddress, rpcToken, listenAddress, listenNetwork, nsString, gasPrice)
 		}
