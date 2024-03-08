@@ -9,11 +9,13 @@ require (
 	github.com/celestiaorg/celestia-node v0.13.0
 	github.com/celestiaorg/nmt v0.20.0
 	github.com/cristalhq/jwt v1.2.0
+	github.com/ethereum/go-ethereum v1.13.2
 	github.com/filecoin-project/go-jsonrpc v0.3.1
 	github.com/gin-gonic/gin v1.7.0
 	github.com/ipfs/go-log/v2 v2.5.1
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/ory/dockertest/v3 v3.10.0
+	github.com/rollkit/celestia-da v0.13.0
 	github.com/rollkit/go-da v0.4.0
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/pflag v1.0.5
@@ -99,7 +101,6 @@ require (
 	github.com/dvsekhvalnov/jose2go v1.5.0 // indirect
 	github.com/elastic/gosigar v0.14.2 // indirect
 	github.com/ethereum/c-kzg-4844 v0.3.1 // indirect
-	github.com/ethereum/go-ethereum v1.13.2 // indirect
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/filecoin-project/dagstore v0.5.6 // indirect
 	github.com/flynn/noise v1.0.0 // indirect
@@ -138,7 +139,6 @@ require (
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.12.0 // indirect
-	github.com/gopherjs/gopherjs v0.0.0-20190812055157-5d271430af9f // indirect
 	github.com/gorilla/handlers v1.5.1 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
