@@ -5,8 +5,8 @@ import (
 	"encoding/hex"
 	rpc "github.com/celestiaorg/celestia-node/api/rpc/client"
 	"github.com/celestiaorg/celestia-node/share"
+	"github.com/ernest8976/celestia-da/celestia"
 	"github.com/gin-gonic/gin"
-	"github.com/rollkit/celestia-da/celestia"
 	"net/http"
 )
 
