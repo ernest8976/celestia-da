@@ -26,8 +26,8 @@ RUN uname -a &&\
 
 FROM docker.io/alpine:3.18.4
 
-# Read here why UID 10001: https://github.com/hexops/dockerfile/blob/main/README.md#do-not-use-a-uid-below-10000
-ARG UID=10001
+## Read here why UID 10001: https://github.com/hexops/dockerfile/blob/main/README.md#do-not-use-a-uid-below-10000
+#ARG UID=10001
 ARG USER_NAME=celestia
 
 ENV CELESTIA_HOME=/home/${USER_NAME}
@@ -41,20 +41,12 @@ RUN uname -a &&\
     apk update && apk add --no-cache \
         bash \
         curl \
-        jq \
-    && adduser ${USER_NAME} \
-        -D \
-        -g ${USER_NAME} \
-        -h ${CELESTIA_HOME} \
-        -s /sbin/nologin \
-        -u ${UID}
+        jq
 
 # Copy in the binary
 COPY --from=builder /src/build/celestia-da /bin/celestia-da
 
-COPY --chown=${USER_NAME}:${USER_NAME} docker/entrypoint.sh /opt/entrypoint.sh
-
-USER ${USER_NAME}
+COPY  docker/entrypoint.sh /opt/entrypoint.sh
 
 EXPOSE 2121
 
