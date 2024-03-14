@@ -42,7 +42,6 @@ RUN uname -a &&\
         bash \
         curl \
         jq \
-    # Creates a user with $UID and $GID=$UID
     && adduser ${USER_NAME} \
         -D \
         -g ${USER_NAME} \
